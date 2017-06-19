@@ -4,7 +4,8 @@
 \alias{data_processer}
 \title{data_processer}
 \usage{
-data_processer(folder = QUERY_FOLDER, scenarios = SCENARIOS)
+data_processer(folder = QUERY_FOLDER, scenarios = SCENARIOS,
+  query_dir = QUERY_FOLDER)
 }
 \arguments{
 \item{folder}{Directory with GCAM queries only}

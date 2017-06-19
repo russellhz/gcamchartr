@@ -14,6 +14,12 @@
 #' bar_chart_plot(data[["primary_energy"]], output_dir = "/outputs")
 
 bar_chart_plot <- function(data, output_dir, fill_col = attributes(data)$fill, colors = attributes(data)$colors, width = 10, height = 7, break_size = 10){
+  # Make sure output directory exists and ends in "/"
+  if (substr(output_dir, nchar(output_dir), nchar(output_dir)) != "/"){
+    output_dir <- paste0(output_dir, "/")
+  }
+  if (!dir.exists(output_dir)) {dir.create(output_dir)}
+
   if ("Units" %in% names(data)) {y_axis <- unique(data$Units)}
 
   all_scen_plot <- ggplot(data, aes_string("year", "value", fill = fill_col)) +

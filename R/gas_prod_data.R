@@ -9,15 +9,15 @@
 #' @examples
 #' gas_prod_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
-gas_prod_data <- function(query, scenarios, diff = NULL){
+gas_prod_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   tech_order <- c("coal gasification", "natural gas", "biomass gasification")
 
-  query_title <- query_id(QUERY_FOLDER) %>%
+  query_title <- query_id(query_dir) %>%
     filter(file == query) %>%
     select(title) %>%
     as.character
 
-  GP <- readr::read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
+  GP <- readr::read_csv(paste0(query_dir,query), skip = 1) %>%
     select(-X27) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%

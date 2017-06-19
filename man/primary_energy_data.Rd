@@ -4,7 +4,7 @@
 \alias{primary_energy_data}
 \title{primary_energy_data}
 \usage{
-primary_energy_data(query, scenarios)
+primary_energy_data(query, scenarios, query_dir = QUERY_FOLDER)
 }
 \arguments{
 \item{query}{GCAM query containing primary energy data of one or multiple scenarios}

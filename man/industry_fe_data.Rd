@@ -4,7 +4,7 @@
 \alias{industry_fe_data}
 \title{industry_fe_data}
 \usage{
-industry_fe_data(query, scenarios, diff = NULL)
+industry_fe_data(query, scenarios, query_dir = QUERY_FOLDER)
 }
 \arguments{
 \item{query}{GCAM query containing industry final energy output data of one or multiple scenarios}

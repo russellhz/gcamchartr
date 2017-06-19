@@ -4,7 +4,7 @@
 \alias{pass_transport_so_data}
 \title{pass_transport_so_data}
 \usage{
-pass_transport_so_data(query, scenarios)
+pass_transport_so_data(query, scenarios, query_dir = QUERY_FOLDER)
 }
 \arguments{
 \item{query}{GCAM query containing transportation service output data of one or multiple scenarios}

@@ -9,17 +9,17 @@
 #' @examples
 #' primary_energy_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
-primary_energy_data <- function(query, scenarios){
+primary_energy_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   fuel_order <- c("oil", "oil CCS", "natural gas", "natural gas CCS", "coal", "coal CCS",
                   "biomass", "biomass CCS", "regional corn for ethanol CCS", "nuclear",
                   "hydro", "solar", "wind", "geothermal", "traditional biomass")
 
-  query_title <- query_id(QUERY_FOLDER) %>%
+  query_title <- query_id(query_dir) %>%
     filter(file == query) %>%
     select(title) %>%
     as.character
 
-  PE <- readr::read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
+  PE <- readr::read_csv(paste0(query_dir,query), skip = 1) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios,
            !grepl("bio-ceiling", fuel)) %>%

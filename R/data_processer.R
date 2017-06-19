@@ -8,6 +8,9 @@
 
 data_processer <- function(folder = QUERY_FOLDER, scenarios = SCENARIOS){
   data_output <- list()
+  if (substr(folder, nchar(folder), nchar(folder)) != "/"){
+    folder <- paste0(folder, "/")
+  }
   queries <- query_id(folder)
   for (i in 1:dim(queries)[1]){
     if (queries$title[i] %in% query_function_map){
@@ -15,7 +18,7 @@ data_processer <- function(folder = QUERY_FOLDER, scenarios = SCENARIOS){
       for (name in fun_name){
         fun <- get(name)
         object_name <- name %>% stringr::str_replace("_data", "")
-        data_output[[object_name]] <- fun(queries$file[i], scenarios)
+        data_output[[object_name]] <- fun(queries$file[i], scenarios, folder)
       }
     }
   }

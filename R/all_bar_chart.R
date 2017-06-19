@@ -6,5 +6,5 @@
 #' @export
 
 all_bar_chart <- function(data, output_dir, width = 10, height = 7, break_size = 10){
-  lapply(data, bar_chart_plot,output_dir = output_dir, width = 10, height = 7, break_size = 10)
+  invisible(lapply(data, bar_chart_plot,output_dir = output_dir, width = 10, height = 7, break_size = 10))
 } # all_bar_chart

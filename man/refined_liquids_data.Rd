@@ -4,7 +4,7 @@
 \alias{refined_liquids_data}
 \title{refined_liquids_data}
 \usage{
-refined_liquids_data(query, scenarios, diff = NULL)
+refined_liquids_data(query, scenarios, query_dir = QUERY_FOLDER)
 }
 \arguments{
 \item{query}{GCAM query containing refined liquids data of one or multiple scenarios}

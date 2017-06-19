@@ -4,7 +4,7 @@
 \alias{gas_prod_data}
 \title{gas_prod_data}
 \usage{
-gas_prod_data(query, scenarios, diff = NULL)
+gas_prod_data(query, scenarios, query_dir = QUERY_FOLDER)
 }
 \arguments{
 \item{query}{GCAM query containing gas production output data of one or multiple scenarios}

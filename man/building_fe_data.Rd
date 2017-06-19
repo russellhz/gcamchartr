@@ -4,7 +4,7 @@
 \alias{building_fe_data}
 \title{building_fe_data}
 \usage{
-building_fe_data(query, scenarios, diff = NULL)
+building_fe_data(query, scenarios, query_dir = QUERY_FOLDER)
 }
 \arguments{
 \item{query}{GCAM query containing building final energy output data of one or multiple scenarios}
