@@ -1,4 +1,15 @@
-primary_energy_data <- function(query, scenarios, diff = NULL){
+#' primary_energy_data
+#'
+#' Process primary energy query
+#' @param query GCAM query containing primary energy data of one or multiple scenarios
+#' @param scenario GCAM scenarios to include in processed data
+#' @keywords primary energy
+#' @import tidyverse stringr
+#' @export
+#' @examples
+#' primary_energy_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
+
+primary_energy_data <- function(query, scenarios){
   fuel_order <- c("oil", "oil CCS", "natural gas", "natural gas CCS", "coal", "coal CCS",
                   "biomass", "biomass CCS", "regional corn for ethanol CCS", "nuclear",
                   "hydro", "solar", "wind", "geothermal", "traditional biomass")
