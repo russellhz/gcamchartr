@@ -1,0 +1,8 @@
+input,fuel
+elect_td_ind,Electricity
+delivered biomass,Biomass (delivered)
+delivered coal,Coal (delivered)
+district heat,District Heat
+H2 enduse,Hydrogen
+refined liquids industrial,Refined Liquids
+wholesale gas,Natural Gas (wholesale)

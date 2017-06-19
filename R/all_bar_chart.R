@@ -3,7 +3,6 @@
 #' Saves all bar charts in list from data_processer
 #' @param data List from data_processer
 #' @param output_dir Directory to save figures to
-#' @import tidyverse stringr
 #' @export
 
 all_bar_chart <- function(data, output_dir, width = 10, height = 7, break_size = 10){

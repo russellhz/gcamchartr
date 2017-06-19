@@ -4,7 +4,7 @@
 #' @param query GCAM query containing gas production output data of one or multiple scenarios
 #' @param scenario GCAM scenarios to include in processed data
 #' @keywords gas production
-#' @import tidyverse stringr
+#' @import dplyr tidyr
 #' @export
 #' @examples
 #' gas_prod_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
@@ -17,7 +17,7 @@ gas_prod_data <- function(query, scenarios, diff = NULL){
     select(title) %>%
     as.character
 
-  GP <- read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
+  GP <- readr::read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
     select(-X27) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%

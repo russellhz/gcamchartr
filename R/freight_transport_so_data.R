@@ -4,7 +4,7 @@
 #' @param query GCAM query containing transportation service output data of one or multiple scenarios
 #' @param scenario GCAM scenarios to include in processed data
 #' @keywords freight transportation service output
-#' @import tidyverse stringr
+#' @import dplyr tidyr
 #' @export
 #' @examples
 #' freight_transport_so_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
@@ -17,7 +17,7 @@ freight_transport_so_data <- function(query, scenarios){
     select(title) %>%
     as.character
 
-  FSO <- read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
+  FSO <- readr::read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
     select(-X28) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios,

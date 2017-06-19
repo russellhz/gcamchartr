@@ -4,14 +4,14 @@
 #' @param query GCAM query containing refined liquids data of one or multiple scenarios
 #' @param scenario GCAM scenarios to include in processed data
 #' @keywords refined liquids
-#' @import tidyverse stringr
+#' @import dplyr tidyr
 #' @export
 #' @examples
 #' refined_liquids_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
 
 refined_liquids_data <- function(query, scenarios, diff = NULL){
-  refined_liquids_lookup <- read_csv(paste0(DIR,"assumptions/refined_liquids_lookup.csv"))
+  refined_liquids_lookup <- readr::read_csv(system.file("extdata", "refined_liquids_lookup.csv", package = "gcamchartr"))
 
   fuel_order <- c("Oil", "Natural Gas", "Coal", "Coal CCS", "Biomass", "Biomass CCS")
 
@@ -20,7 +20,7 @@ refined_liquids_data <- function(query, scenarios, diff = NULL){
     select(title) %>%
     as.character
 
-  RL <- read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
+  RL <- readr::read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%
     gather(year, value, `1990`:`2100`) %>%

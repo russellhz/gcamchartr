@@ -4,13 +4,13 @@
 #' @param query GCAM query containing building final energy output data of one or multiple scenarios
 #' @param scenario GCAM scenarios to include in processed data
 #' @keywords building final energy
-#' @import tidyverse stringr
+#' @import dplyr tidyr
 #' @export
 #' @examples
 #' building_fe_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
 building_fe_data <- function(query, scenarios, diff = NULL){
-  building_fe_lookup <- read_csv(paste0(DIR,"assumptions/building_fe_lookup.csv"))
+  building_fe_lookup <- readr::read_csv(system.file("extdata", "building_fe_lookup.csv", package = "gcamchartr"))
 
   fuel_order <- c("Refined Liquids", "Natural Gas (delivered)", "Coal (delivered)", "Biomass (delivered)",
                   "Electricity", "Traditional Biomass", "District Heat")
@@ -20,7 +20,7 @@ building_fe_data <- function(query, scenarios, diff = NULL){
     select(title) %>%
     as.character
 
-  BFE <- read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
+  BFE <- readr::read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
     select(-X27) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%

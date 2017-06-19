@@ -7,7 +7,7 @@
 #' @param colors Vector of colors for chart. Defaults to attribute of "colors" for processed data
 #' @param break_size Interval of years to print on x axis, starting with minimum year in data. Default is 10 years
 #' @keywords bar chart
-#' @import tidyverse stringr
+#' @import dplyr ggplot2 tidyr
 #' @export
 #' @examples
 #' bar_chart_plot(df, output_dir = "/outputs", fill = "technology", colors = c("red", "blue"))
@@ -19,7 +19,7 @@ bar_chart_plot <- function(data, output_dir, fill_col = attributes(data)$fill, c
   all_scen_plot <- ggplot(data, aes_string("year", "value", fill = fill_col)) +
     geom_bar(stat="identity", position = position_stack(reverse = TRUE)) +
     scale_fill_manual(values = colors) +
-    guides(fill = guide_legend(reverse = TRUE, title=str_to_title(fill_col))) +
+    guides(fill = guide_legend(reverse = TRUE, title = stringr::str_to_title(fill_col))) +
     labs(y = y_axis, title = attributes(data)$query) +
     theme(plot.title = element_text(size = 18, face = "bold"),
           axis.title.x = element_text(size = 14),

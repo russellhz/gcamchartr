@@ -4,13 +4,13 @@
 #' @param query GCAM query containing industry final energy output data of one or multiple scenarios
 #' @param scenario GCAM scenarios to include in processed data
 #' @keywords industry final energy
-#' @import tidyverse stringr
+#' @import dplyr tidyr
 #' @export
 #' @examples
 #' industry_fe_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
 industry_fe_data <- function(query, scenarios, diff = NULL){
-  industry_fe_lookup <- read_csv(paste0(DIR,"assumptions/industry_fe_lookup.csv"))
+  industry_fe_lookup <- readr::read_csv(system.file("extdata", "industry_fe_lookup.csv", package = "gcamchartr"))
 
   fuel_order <- c("Refined Liquids", "Natural Gas (wholesale)", "Coal (delivered)", "Biomass (delivered)",
                   "Electricity", "Hydrogen", "District Heat")
@@ -20,7 +20,7 @@ industry_fe_data <- function(query, scenarios, diff = NULL){
     select(title) %>%
     as.character
 
-  IFE <- read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
+  IFE <- readr::read_csv(paste0(QUERY_FOLDER,query), skip = 1) %>%
     select(-X27) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%

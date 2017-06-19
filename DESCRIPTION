@@ -4,7 +4,15 @@ Version: 0.0.0.9000
 Author: PNNL/JGCRI
 Maintainer: Russell Horowitz<russell.horowitz@pnnl.gov>
 Description: Reads in queries and applies bar charts
-Depends: R (>= 3.3.0)
+Depends: 
+	R (>= 3.3.0)
+Imports:
+	dplyr,
+	ggplot2,
+	readr,
+	stringr,
+	tibble,
+	tidyr
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
