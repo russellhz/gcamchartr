@@ -23,5 +23,5 @@ GAS_PROC_COLORS <- c(`coal gasification` = "lightgoldenrod4", `natural gas` = "d
 
 LAND_COLORS <- c(`Forest (unmanaged)` = "saddlebrown", `Forest (managed)` = "sandybrown",
                  `Pasture (other)` = "green4", `Pasture (grazed)` = "green",
-                 Desert = "antiquewhite3", Grass = "firebrick", Shrubs = "darkviolet",Crops = "dodgerblue3",
+                 Desert = "khaki", Grass = "firebrick", Shrubs = "darkviolet",Crops = "dodgerblue3",
                  Biomass = "gold", OtherArable = "deeppink3", Urban = "black", Tundra = 'turquoise')
