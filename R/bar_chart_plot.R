@@ -13,7 +13,8 @@
 #' bar_chart_plot(df, output_dir = "/outputs", fill = "technology", colors = c("red", "blue"))
 #' bar_chart_plot(data[["primary_energy"]], output_dir = "/outputs")
 
-bar_chart_plot <- function(data, output_dir, fill_col = attributes(data)$fill, colors = attributes(data)$colors, width = 10, height = 7, break_size = 10){
+bar_chart_plot <- function(data, output_dir, fill_col = attributes(data)$fill, colors = attributes(data)$colors, diff = F,
+                           width = 10, height = 7, break_size = 10){
   # Make sure output directory exists and ends in "/"
   if (substr(output_dir, nchar(output_dir), nchar(output_dir)) != "/"){
     output_dir <- paste0(output_dir, "/")
@@ -41,5 +42,14 @@ bar_chart_plot <- function(data, output_dir, fill_col = attributes(data)$fill, c
     all_scen_plot <- all_scen_plot +
       facet_wrap(~scenario, ncol = 2)
   }
-  ggsave(paste0(output_dir, attributes(data)$query,".png"), plot = all_scen_plot, width = width, height = height)
+
+  if (diff == T){
+    all_scen_plot <- all_scen_plot +
+      labs(subtitle = paste("Change from", unique(data$diff_scenario))) +
+      theme(plot.subtitle = element_text(size = 14, face = "italic"))
+
+  ggsave(paste0(output_dir, "DIFF_", attributes(data)$query,".png"), plot = all_scen_plot, width = width, height = height)
+  } else{
+        ggsave(paste0(output_dir, attributes(data)$query,".png"), plot = all_scen_plot, width = width, height = height)
+    }
 }

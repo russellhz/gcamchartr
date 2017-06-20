@@ -14,8 +14,18 @@ scenario_rename <- function(data, name_lookup){
     stop("Not all scenarios have new names")
   }else{
     attr_data <- attributes(data)
-    data <- data %>% mutate(scenario = SCEN_NAMES[scenario])
+    data <- data %>% mutate(scenario = name_lookup[scenario])
     attributes(data) <- attr_data
+  }
+
+  if ("diff_scenario" %in% names(data)){
+    if(unique(data$diff_scenario) %in% names(name_lookup)){
+      data <- data %>% mutate(diff_scenario = name_lookup[diff_scenario])
+      attributes(data) <- attr_data
+    }else{
+      warning("Diff Scenario does not have a new name")
+    }
+
   }
   return(data)
 }

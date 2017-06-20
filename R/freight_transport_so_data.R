@@ -25,6 +25,9 @@ freight_transport_so_data <- function(query, scenarios, query_dir = QUERY_FOLDER
     gather(year, value, `1990`:`2100`) %>%
     mutate(year = as.integer(year)) %>%
     filter(year >= 2010) %>%
+    group_by(scenario, region, technology, Units, year) %>%
+    summarise(value = sum(value)) %>%
+    ungroup() %>%
     mutate(value = value/1000,
            Units = "billion-ton-km",
            technology = factor(technology, levels = tech_order),

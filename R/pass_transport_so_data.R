@@ -18,13 +18,15 @@ pass_transport_so_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     as.character
 
   PSO <- readr::read_csv(paste0(query_dir,query), skip = 1) %>%
-    select(-X28) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios,
            sector == "trn_pass_road_LDV_4W") %>%
     gather(year, value, `1990`:`2100`) %>%
     mutate(year = as.integer(year)) %>%
     filter(year >= 2010) %>%
+    group_by(scenario, region, technology, Units, year) %>%
+    summarise(value = sum(value)) %>%
+    ungroup() %>%
     mutate(value = value/1000,
            Units = "billion-pass-km",
            technology = factor(technology, levels = tech_order),
