@@ -20,7 +20,7 @@ query_id <- function(folder){
     folder <- paste0(folder, "/")
   }
   out_df <- tibble::tibble(file = character(), title = character())
-  input_files <- dir(folder)
+  input_files <- dir(folder, pattern = ".csv")
   for (file in input_files){
     line <- readr::read_lines(paste0(folder,file), n_max =1) %>%
       # Assumes no commas in any query title

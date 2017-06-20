@@ -20,3 +20,8 @@ FINAL_ENERGY_COLORS <- c(`Refined Liquids` = "firebrick4", `Natural Gas (wholesa
                          Electricity = "gold", Hydrogen = "darkorchid", `District Heat` = "black")
 
 GAS_PROC_COLORS <- c(`coal gasification` = "lightgoldenrod4", `natural gas` = "dodgerblue", `biomass gasification` = "green4")
+
+LAND_COLORS <- c(`Forest (unmanaged)` = "saddlebrown", `Forest (managed)` = "sandybrown",
+                 `Pasture (other)` = "green4", `Pasture (grazed)` = "green",
+                 Desert = "antiquewhite3", Grass = "firebrick", Shrubs = "darkviolet",Crops = "dodgerblue3",
+                 Biomass = "gold", OtherArable = "deeppink3", Urban = "black", Tundra = 'turquoise')
