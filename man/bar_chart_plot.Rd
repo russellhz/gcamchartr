@@ -5,7 +5,7 @@
 \title{bar_chart_plot}
 \usage{
 bar_chart_plot(data, output_dir, fill_col = attributes(data)$fill,
-  colors = attributes(data)$colors, width = 10, height = 7,
+  colors = attributes(data)$colors, diff = F, width = 10, height = 7,
   break_size = 10)
 }
 \arguments{

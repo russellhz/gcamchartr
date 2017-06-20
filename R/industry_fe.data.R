@@ -10,7 +10,7 @@
 #' industry_fe_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
 industry_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
-  industry_fe_lookup <- readr::read_csv(system.file("extdata", "industry_fe_lookup.csv", package = "gcamchartr"))
+  industry_fe_lookup <- read_query(system.file("extdata", "industry_fe_lookup.csv", package = "gcamchartr"))
 
   fuel_order <- c("Refined Liquids", "Natural Gas (wholesale)", "Coal (delivered)", "Biomass (delivered)",
                   "Electricity", "Hydrogen", "District Heat")
@@ -20,7 +20,7 @@ industry_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     select(title) %>%
     as.character
 
-  IFE <- readr::read_csv(paste0(query_dir,query), skip = 1) %>%
+  IFE <- read_query(paste0(query_dir,query), skip = 1) %>%
     select(-X27) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%

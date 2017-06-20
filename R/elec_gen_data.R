@@ -19,7 +19,7 @@ elec_gen_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     select(title) %>%
     as.character
 
-  EG <- readr::read_csv(paste0(query_dir,query), skip = 1) %>%
+  EG <- read_query(paste0(query_dir,query), skip = 1) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%
     mutate(technology = if_else(substr(technology,2,2) == " ",

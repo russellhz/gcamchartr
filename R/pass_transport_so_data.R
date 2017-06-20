@@ -17,7 +17,7 @@ pass_transport_so_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     select(title) %>%
     as.character
 
-  PSO <- readr::read_csv(paste0(query_dir,query), skip = 1) %>%
+  PSO <- read_query(paste0(query_dir,query), skip = 1) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios,
            sector == "trn_pass_road_LDV_4W") %>%

@@ -12,7 +12,7 @@ diff_processer(folder = QUERY_FOLDER, scenarios = SCENARIOS,
 
 \item{scenarios}{Vector of scenarios to include in data}
 
-\item{diff_scenario}{Scenario to diff all other scenarios by}
+\item{diff_scenario}{Scenario to diff all other scenarios by. Must be length 1}
 }
 \description{
 Returns a list of processed data for all queries that have processing code, showing difference between scenarios and a reference scenario

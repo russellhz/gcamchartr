@@ -10,7 +10,7 @@
 #' transport_fe_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
 transport_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
-  transport_fe_lookup <- readr::read_csv(system.file("extdata", "transport_fe_lookup.csv", package = "gcamchartr"))
+  transport_fe_lookup <- read_query(system.file("extdata", "transport_fe_lookup.csv", package = "gcamchartr"))
 
   fuel_order <- c("Refined Liquids", "Natural Gas (delivered)", "Coal (delivered)",
                   "Electricity", "Hydrogen")
@@ -20,7 +20,7 @@ transport_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     select(title) %>%
     as.character
 
-  TFE <- readr::read_csv(paste0(query_dir, query), skip = 1) %>%
+  TFE <- read_query(paste0(query_dir, query), skip = 1) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%
     gather(year, value, `1990`:`2100`) %>%

@@ -11,7 +11,7 @@
 
 
 refined_liquids_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
-  refined_liquids_lookup <- readr::read_csv(system.file("extdata", "refined_liquids_lookup.csv", package = "gcamchartr"))
+  refined_liquids_lookup <- read_query(system.file("extdata", "refined_liquids_lookup.csv", package = "gcamchartr"))
 
   fuel_order <- c("Oil", "Natural Gas", "Coal", "Coal CCS", "Biomass", "Biomass CCS")
 
@@ -20,7 +20,7 @@ refined_liquids_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     select(title) %>%
     as.character
 
-  RL <- readr::read_csv(paste0(query_dir,query), skip = 1) %>%
+  RL <- read_query(paste0(query_dir,query), skip = 1) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%
     gather(year, value, `1990`:`2100`) %>%

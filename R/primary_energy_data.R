@@ -19,7 +19,7 @@ primary_energy_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     select(title) %>%
     as.character
 
-  PE <- readr::read_csv(paste0(query_dir,query), skip = 1) %>%
+  PE <- read_query(paste0(query_dir,query), skip = 1) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios,
            !grepl("bio-ceiling", fuel)) %>%

@@ -17,7 +17,7 @@ gas_prod_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     select(title) %>%
     as.character
 
-  GP <- readr::read_csv(paste0(query_dir,query), skip = 1) %>%
+  GP <- read_query(paste0(query_dir,query), skip = 1) %>%
     select(-X27) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%

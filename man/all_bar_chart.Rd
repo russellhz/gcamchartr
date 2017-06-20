@@ -4,7 +4,7 @@
 \alias{all_bar_chart}
 \title{all_bar_chart}
 \usage{
-all_bar_chart(data, output_dir, width = 10, height = 7, break_size = 10)
+all_bar_chart(data, output_dir, ...)
 }
 \arguments{
 \item{data}{List from data_processer}
