@@ -36,7 +36,7 @@ building_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
                               substr(scenario, 1, regexpr(",date", scenario)[1]-1),
                               scenario))
   attr(BFE, "query") <- "Building Final Energy"
-  attr(BFE, "colors") <- BUILDING_FE_COLORS
+  attr(BFE, "colors") <- FINAL_ENERGY_COLORS
   attr(BFE, "fill") <- "fuel"
 
   return(BFE)

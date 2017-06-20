@@ -36,7 +36,7 @@ industry_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
                               substr(scenario, 1, regexpr(",date", scenario)[1]-1),
                               scenario))
   attr(IFE, "query") <- "Industry Final Energy"
-  attr(IFE, "colors") <- INDUSTRY_FE_COLORS
+  attr(IFE, "colors") <- FINAL_ENERGY_COLORS
   attr(IFE, "fill") <- "fuel"
 
   return(IFE)

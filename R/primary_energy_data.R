@@ -10,9 +10,9 @@
 #' primary_energy_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
 primary_energy_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
-  fuel_order <- c("oil", "oil CCS", "natural gas", "natural gas CCS", "coal", "coal CCS",
-                  "biomass", "biomass CCS", "regional corn for ethanol CCS", "nuclear",
-                  "hydro", "solar", "wind", "geothermal", "traditional biomass")
+  fuel_order <- c("Oil", "Oil CCS", "Natural Gas", "Natural Gas CCS", "Coal", "Coal CCS",
+                  "Biomass", "Biomass CCS", "Regional Corn For Ethanol CCS", "Nuclear",
+                  "Hydro", "Solar", "Wind", "Geothermal", "Traditional Biomass")
 
   query_title <- query_id(query_dir) %>%
     filter(file == query) %>%
@@ -23,7 +23,8 @@ primary_energy_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios,
            !grepl("bio-ceiling", fuel)) %>%
-    mutate(fuel = if_else(substr(fuel,2,2) == " ", substr(fuel, 3, stringr::str_length(fuel)), fuel), fuel) %>%
+    mutate(fuel = if_else(substr(fuel,2,2) == " ", stringr::str_to_title(substr(fuel, 3, stringr::str_length(fuel))),
+                          stringr::str_to_title(fuel), fuel)) %>%
     gather(year, value, `1990`:`2100`) %>%
     mutate(year = as.integer(year)) %>%
     filter(year >= 2010) %>%

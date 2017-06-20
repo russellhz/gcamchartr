@@ -7,4 +7,5 @@ query_function_map <- list(building_fe_data = c("Building final energy by servic
                            industry_fe_data = c("Industry final energy by service and fuel"),
                            pass_transport_so_data = c("Transportation service output by technology"),
                            primary_energy_data = c("Primary energy with CCS (Direct Equivalent)"),
-                           refined_liquids_data = c("Refined liquids production by technology"))
+                           refined_liquids_data = c("Refined liquids production by technology"),
+                           transport_fe_data = c("Transportation final energy by subsector (mode) and fuel"))
