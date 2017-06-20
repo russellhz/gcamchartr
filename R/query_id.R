@@ -7,6 +7,9 @@
 #' query_id(output_dir = "gcam_queries")
 
 query_id <- function(folder){
+  if (substr(folder, nchar(folder), nchar(folder)) != "/"){
+    folder <- paste0(folder, "/")
+  }
   out_df <- tibble::tibble(file = character(), title = character())
   input_files <- dir(folder)
   for (file in input_files){
