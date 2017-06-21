@@ -31,5 +31,7 @@ gas_prod_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(GP, "query") <- "Gas Production"
   attr(GP, "colors") <- GAS_PROC_COLORS
   attr(GP, "fill") <- "technology"
+  attr(GP, "default_plot") <- "bar"
+
   return(GP)
 }

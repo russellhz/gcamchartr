@@ -35,5 +35,7 @@ primary_energy_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(PE, "query") <- query_title
   attr(PE, "colors") <- PRIMARY_ENERGY_COLORS
   attr(PE, "fill") <- "fuel"
+  attr(PE, "default_plot") <- "bar"
+
   return(PE)
 }

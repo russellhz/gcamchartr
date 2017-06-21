@@ -37,5 +37,7 @@ refined_liquids_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(RL, "query") <- query_title
   attr(RL, "colors") <- REFINED_LIQUIDS_COLORS
   attr(RL, "fill") <- "fuel"
+  attr(RL, "default_plot") <- "bar"
+
   return(RL)
 }

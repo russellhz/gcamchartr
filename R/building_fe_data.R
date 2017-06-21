@@ -38,6 +38,7 @@ building_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(BFE, "query") <- "Building Final Energy"
   attr(BFE, "colors") <- FINAL_ENERGY_COLORS
   attr(BFE, "fill") <- "fuel"
+  attr(BFE, "default_plot") <- "bar"
 
   return(BFE)
 }

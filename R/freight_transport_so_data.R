@@ -37,5 +37,6 @@ freight_transport_so_data <- function(query, scenarios, query_dir = QUERY_FOLDER
   attr(FSO, "query") <- paste("Freight", query_title)
   attr(FSO, "colors") <- TRANSPORT_COLORS
   attr(FSO, "fill") <- "technology"
+  attr(FSO, "default_plot") <- "bar"
   return(FSO)
 }

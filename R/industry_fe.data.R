@@ -38,6 +38,8 @@ industry_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(IFE, "query") <- "Industry Final Energy"
   attr(IFE, "colors") <- FINAL_ENERGY_COLORS
   attr(IFE, "fill") <- "fuel"
+  attr(IFE, "default_plot") <- "bar"
+
 
   return(IFE)
 }

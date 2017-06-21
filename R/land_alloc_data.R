@@ -38,5 +38,7 @@ land_alloc_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(LA, "query") <- query_title
   attr(LA, "colors") <- LAND_COLORS
   attr(LA, "fill") <- "Land"
+  attr(LA, "default_plot") <- "bar"
+
   return(LA)
 }

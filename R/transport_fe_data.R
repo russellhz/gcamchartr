@@ -37,6 +37,8 @@ transport_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(TFE, "query") <- query_title
   attr(TFE, "colors") <- FINAL_ENERGY_COLORS
   attr(TFE, "fill") <- "fuel"
+  attr(TFE, "default_plot") <- "bar"
+
 
   return(TFE)
 }

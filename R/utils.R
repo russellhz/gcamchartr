@@ -38,7 +38,32 @@ query_id <- function(folder){
 #' @export
 
 all_bar_chart <- function(data, output_dir, ...){
-  invisible(lapply(data, bar_chart_plot,output_dir = output_dir, ...))
+  # Only plot data with default_plot == "bar_plot"
+  bar_data <- list()
+  for (name in names(data)){
+    if (attributes(data[[name]])$default_plot == "bar"){
+      bar_data[[name]] <- data[[name]]
+    }
+  }
+  invisible(lapply(bar_data, bar_chart_plot,output_dir = output_dir, ...))
+} # all_bar_chart
+
+#' all_line_chart
+#'
+#' Saves all line charts in list from data_processer
+#' @param data List from data_processer
+#' @param output_dir Directory to save figures to
+#' @export
+
+all_line_chart <- function(data, output_dir, ...){
+  # Only plot data with default_plot == "bar_plot"
+  line_data <- list()
+  for (name in names(data)){
+    if (attributes(data[[name]])$default_plot == "line"){
+      line_data[[name]] <- data[[name]]
+    }
+  }
+  invisible(lapply(line_data, line_chart_plot,output_dir = output_dir, ...))
 } # all_bar_chart
 
 #' scenario_rename

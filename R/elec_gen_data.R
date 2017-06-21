@@ -34,5 +34,7 @@ elec_gen_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(EG, "query") <- query_title
   attr(EG, "colors") <- ELEC_GEN_COLORS
   attr(EG, "fill") <- "technology"
+  attr(EG, "default_plot") <- "bar"
+
   return(EG)
 }

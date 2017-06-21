@@ -36,5 +36,7 @@ pass_transport_so_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(PSO, "query") <- paste("Passenger",query_title)
   attr(PSO, "colors") <- TRANSPORT_COLORS
   attr(PSO, "fill") <- "technology"
+  attr(PSO, "default_plot") <- "bar"
+
   return(PSO)
 }
