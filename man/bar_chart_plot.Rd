@@ -5,8 +5,8 @@
 \title{bar_chart_plot}
 \usage{
 bar_chart_plot(data, output_dir, fill_col = attributes(data)$fill,
-  colors = attributes(data)$colors, diff = F, width = 10, height = 7,
-  break_size = 10)
+  colors = attributes(data)$colors, diff = F, region = NULL, width = 10,
+  height = 7, break_size = 10)
 }
 \arguments{
 \item{data}{Dataframe/tibble of processed GCAM data}
@@ -16,6 +16,10 @@ bar_chart_plot(data, output_dir, fill_col = attributes(data)$fill,
 \item{fill_col}{Column name, in quotes, to color by. Defaults to attribute of "fill" for processed data.}
 
 \item{colors}{Vector of colors for chart. Defaults to attribute of "colors" for processed data}
+
+\item{diff}{If true, adds subtitle to plot and DIFF to output name}
+
+\item{region}{String of region name to filter by}
 
 \item{break_size}{Interval of years to print on x axis, starting with minimum year in data. Default is 10 years}
 }
