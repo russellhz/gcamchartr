@@ -25,6 +25,7 @@ primary_energy_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
            !grepl("bio-ceiling", fuel)) %>%
     mutate(fuel = if_else(substr(fuel,2,2) == " ", stringr::str_to_title(substr(fuel, 3, stringr::str_length(fuel))),
                           stringr::str_to_title(fuel), fuel)) %>%
+    mutate(fuel = stringr::str_replace(fuel, "Ccs","CCS")) %>%
     gather(year, value, `1990`:`2100`) %>%
     mutate(year = as.integer(year)) %>%
     filter(year >= 2010) %>%

@@ -2,7 +2,7 @@
 
 PRIMARY_ENERGY_COLORS <- c(Oil = "red4", `Oil CCS` = "red", `Natural Gas` = "dodgerblue4", `Natural Gas CCS` = "dodgerblue",
                            Coal = "maroon4", `Coal CCS` = "maroon1", Biomass = "green4", `Biomass CCS` = "green",
-                           `Regional Corn For Ethanol` = "palevioletred4", Nuclear = "darkorange", `Hydro` = "cyan",
+                           `Regional Corn For Ethanol CCS` = "gray50", Nuclear = "darkorange", `Hydro` = "cyan",
                            Solar ="gold", Wind = "orchid1", Geothermal = "saddlebrown", `Traditional Biomass` = "black")
 
 ELEC_GEN_COLORS <- c(Oil = "red4", `Oil w/ CCS` = "red", `Gas` = "dodgerblue4", `Gas w/ CCS` = "dodgerblue",

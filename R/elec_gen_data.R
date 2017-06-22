@@ -24,6 +24,7 @@ elec_gen_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
            scenario %in% scenarios) %>%
     mutate(technology = if_else(substr(technology,2,2) == " ",
                                 substr(technology, 3, stringr::str_length(technology)), technology), technology) %>%
+    mutate(technology = stringr::str_replace(technology, "w/", "w/ ")) %>%
     gather(year, value, `1990`:`2100`) %>%
     mutate(year = as.integer(year)) %>%
     filter(year >= 2010) %>%

@@ -82,7 +82,9 @@ scenario_rename <- function(data, name_lookup){
     stop("Not all scenarios have new names")
   }else{
     attr_data <- attributes(data)
-    data <- data %>% mutate(scenario = name_lookup[scenario])
+    data <- data %>%
+      mutate(scenario = name_lookup[scenario]) %>%
+      mutate(scenario = factor(scenario, levels = name_lookup))
     attributes(data) <- attr_data
   }
 
@@ -157,6 +159,7 @@ diff_processer <- function(folder = QUERY_FOLDER, scenarios = SCENARIOS, diff_sc
         attr(data_output[[object_name]], "query") <- attr_data$query
         attr(data_output[[object_name]], "colors") <- attr_data$colors
         attr(data_output[[object_name]], "fill") <- attr_data$fill
+        attr(data_output[[object_name]], "default_plot") <- attr_data$default_plot
       }
     }
   }
