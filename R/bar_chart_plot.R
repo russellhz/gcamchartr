@@ -58,7 +58,8 @@ bar_chart_plot <- function(data, output_dir, fill_col = attributes(data)$fill, c
   if (diff == T){
     all_scen_plot <- all_scen_plot +
       labs(subtitle = paste("Change from", unique(data$diff_scenario))) +
-      theme(plot.subtitle = element_text(size = 14, face = "italic"))
+      theme(plot.subtitle = element_text(size = 14, face = "italic")) +
+      geom_hline(yintercept=0)
 
     filename <- paste0(output_dir, "DIFF_", attributes(data)$query,".png")
   } else{ filename <- paste0(output_dir, attributes(data)$query,".png")}
