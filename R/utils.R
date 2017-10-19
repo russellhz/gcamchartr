@@ -1,10 +1,21 @@
+#' date_remover
+#'
+#' Remove date from scenario name
+#' @import dplyr tidyr
+date_remover <- function (x)
+{
+  pos <- regexpr(",date", x)
+  ifelse(pos > -1L, substr(x, 1, pos - 1L), x)
+}
+
 #' read_query
 #'
 #' Read in GCAM queries
 #' @import dplyr tidyr
 
 read_query <- function(...){
-  suppressMessages(readr::read_csv(...))
+  suppressMessages(readr::read_csv(...)) %>%
+    mutate(scenario = date_remover(scenario))
 }
 
 #' query_id
