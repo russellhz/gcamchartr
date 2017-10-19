@@ -165,3 +165,47 @@ diff_processer <- function(folder = QUERY_FOLDER, scenarios = SCENARIOS, diff_sc
   }
   return(data_output)
 }
+
+#' query_splitter
+#'
+#' For one csv file with multiple queries. Writes into individual query csv files
+#' @param query_file Query file location
+#' @param output_dir Where output csvs are to be written
+#' @import dplyr tidyr
+#' @export
+
+query_splitter <- function(query_file, output_dir){
+  # Read in non-scenario-specific queries copied to excel and saved as csv's
+  # This for loop divides up the query into individual queries, based on where "scenario" occurs in the query output
+  query_text <- readr::read_lines(query_file)
+  query_start <- grep("scenario", query_text)
+  # keep queries whose names are in the query_function_map
+  query_names <- unique(query_text[query_start - 1])
+  query_names <- query_names[query_names %in% query_function_map]
+
+  # Loop through for each query name (there may be multiple locations with same query)
+  for (name in query_names){
+    nums <- which(query_text[query_start - 1] == name)
+    tibble_list <- list()
+    for (i in nums){
+      query_pos <- query_start[i]
+      # If the query is not the last query in file, only read in until next query
+      if (i != length(query_start)){
+        next_query_pos <- query_start[i+1]
+        df <- read_query(query_file, skip = query_pos - 1, n_max = next_query_pos - query_pos - 2)
+        # Otherwise, read until end of file
+      }else{
+        df <- read_query(query_file, skip = query_pos - 1)
+      }
+      tibble_list[[i]] <- df
+    }
+    # bind rows of same query and write output
+    df <- do.call(bind_rows, tibble_list)
+    num <- which(query_names == name)
+    fqfn <- paste0(output_dir,"query_", num,".csv")
+
+    # Add title to csv, then write
+    cat(name, file = fqfn, sep = "\n")
+    readr::write_csv(df, fqfn, append = TRUE, col_names = TRUE)
+  }
+}
