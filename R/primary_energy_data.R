@@ -22,7 +22,7 @@ primary_energy_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   PE <- read_query(paste0(query_dir,query), skip = 1) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios,
-           !grepl("bio-ceiling", fuel)) %>%
+           !grepl("bio-ceiling|bio-floor", fuel)) %>%
     mutate(fuel = if_else(substr(fuel,2,2) == " ", stringr::str_to_title(substr(fuel, 3, stringr::str_length(fuel))),
                           stringr::str_to_title(fuel), fuel)) %>%
     mutate(fuel = stringr::str_replace(fuel, "Ccs","CCS")) %>%
