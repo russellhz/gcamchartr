@@ -10,7 +10,7 @@
 #' land_alloc_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
 land_alloc_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
-  land_alloc_lookup <- read_query(system.file("extdata", "land_alloc_lookup.csv", package = "gcamchartr"))
+  land_alloc_lookup <-  suppressMessages(readr::read_csv(system.file("extdata", "land_alloc_lookup.csv", package = "gcamchartr")))
 
   land_order <- c("Forest (unmanaged)","Forest (managed)","Pasture (other)", "Pasture (grazed)", "Desert",
                   "Grass", "Shrubs", "Crops", "Biomass", "OtherArable", "Urban", "Tundra")

@@ -10,7 +10,7 @@
 #' building_fe_data("queryA.csv", c("Reference1,date=2017-9-6T13:43:53-07:00", "Reference2,date=2017-9-6T13:43:53-07:00"))
 
 building_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
-  building_fe_lookup <- read_query(system.file("extdata", "building_fe_lookup.csv", package = "gcamchartr"))
+  building_fe_lookup <-  suppressMessages(readr::read_csv(system.file("extdata", "building_fe_lookup.csv", package = "gcamchartr")))
 
   fuel_order <- c("Refined Liquids", "Natural Gas (delivered)", "Coal (delivered)", "Biomass (delivered)",
                   "Electricity", "Traditional Biomass", "District Heat")

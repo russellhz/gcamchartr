@@ -11,7 +11,7 @@
 
 
 refined_liquids_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
-  refined_liquids_lookup <- read_query(system.file("extdata", "refined_liquids_lookup.csv", package = "gcamchartr"))
+  refined_liquids_lookup <-  suppressMessages(readr::read_csv(system.file("extdata", "refined_liquids_lookup.csv", package = "gcamchartr")))
 
   fuel_order <- c("Oil", "Natural Gas", "Coal", "Coal CCS", "Biomass", "Biomass CCS")
 
