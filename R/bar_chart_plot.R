@@ -16,7 +16,7 @@
 #' bar_chart_plot(data[["primary_energy"]], output_dir = "/outputs")
 
 bar_chart_plot <- function(data, output_dir, fill_col = attributes(data)$fill, colors = attributes(data)$colors, diff = F,
-                           region = NULL, width = 10, height = 7, break_size = 10){
+                           region = NULL, width = 10, height = 7, break_size = 10, remove_title = F){
   # Filter by region if necessary
   if (!is.null(region)){
     if (length(unique(data$region)) > 1){
@@ -35,24 +35,45 @@ bar_chart_plot <- function(data, output_dir, fill_col = attributes(data)$fill, c
 
   if ("Units" %in% names(data)) {y_axis <- unique(data$Units)}
 
+  max_y_axis <- data %>%
+    group_by(scenario, year) %>%
+    summarise(value = sum(value)) %>%
+    ungroup()
+
+  max_y_axis <- max(max_y_axis$value) * 1.05
+
   all_scen_plot <- ggplot(data, aes_string("year", "value", fill = fill_col)) +
     geom_bar(stat="identity", position = position_stack(reverse = TRUE)) +
     scale_fill_manual(values = colors) +
     guides(fill = guide_legend(reverse = TRUE, title = stringr::str_to_title(fill_col))) +
-    labs(y = y_axis, title = attributes(data)$query) +
-    theme(plot.title = element_text(size = 18, face = "bold"),
-          axis.title.x = element_text(size = 14),
+    labs(y = y_axis) +
+    theme(axis.title.x = element_text(size = 14),
           axis.title.y = element_text(size = 14),
-          axis.text.x = element_text(size = 12, angle = 45),
+          axis.text.x = element_text(size = 12, angle = 90, vjust = 0.5, hjust=1),
           axis.text.y = element_text(size = 12),
           strip.text = element_text(size = 14),
-          legend.title = element_text(size = 14)) +
-    scale_x_continuous(breaks = seq(min(data$year), max(data$year),break_size))
+          legend.title = element_text(size = 14),
+          panel.border = element_rect(colour = "black", fill=NA, size=1),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank(),
+          panel.background = element_rect(color = "white", fill = "white"),
+          panel.grid.major.y = element_line(color = "gray62"),
+          panel.grid.minor.y = element_line(color = "gray62")) +
+    scale_x_continuous(breaks = seq(min(data$year), max(data$year),break_size),
+                       expand = c(0.01,0)) +
+    expand_limits(y = 0) +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, max_y_axis))
 
+
+  if (remove_title == FALSE){
+    all_scen_plot <- all_scen_plot +
+      labs(title = attributes(data)$query) +
+      theme(plot.title = element_text(size = 18, face = "bold"))
+  }
 
   if ("scenario" %in% names(data) & length(data$scenario) > 1){
     all_scen_plot <- all_scen_plot +
-      facet_wrap(~scenario, ncol = 2)
+      facet_wrap(~scenario, nrow = 2, scales = "free_x")
   }
 
   if (diff == T){

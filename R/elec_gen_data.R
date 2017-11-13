@@ -12,7 +12,7 @@
 elec_gen_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   tech_order <- c("Oil", "Oil w/ CCS", "Gas", "Gas w/ CCS", "Coal", "Coal w/ CCS",
                   "Biomass", "Biomass w/ CCS", "Nuclear",
-                  "Hydro", "Solar", "Wind", "Geothermal", "CHP")
+                  "Hydro", "Solar", "Wind", "Geothermal", "H2 CHP")
 
   query_title <- query_id(query_dir) %>%
     filter(file == query) %>%
@@ -28,7 +28,8 @@ elec_gen_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     gather(year, value, `1990`:`2100`) %>%
     mutate(year = as.integer(year)) %>%
     filter(year >= 2010) %>%
-    mutate(technology = factor(technology, levels = tech_order),
+    mutate(technology = if_else(technology == "refined liquids (CC CCS)", "Oil w/ CCS", technology),
+           technology = factor(technology, levels = tech_order),
            scenario = if_else(grepl(",date", scenario),
                               substr(scenario, 1, regexpr(",date", scenario)[1]-1),
                               scenario))

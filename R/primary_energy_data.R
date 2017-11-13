@@ -29,6 +29,10 @@ primary_energy_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     gather(year, value, `1990`:`2100`) %>%
     mutate(year = as.integer(year)) %>%
     filter(year >= 2010) %>%
+    mutate(fuel = if_else(fuel == "Regional Corn For Ethanol CCS", "Biomass CCS", fuel)) %>%
+    group_by(scenario, region, fuel, year, Units) %>%
+    summarise(value = sum(value)) %>%
+    ungroup() %>%
     mutate(fuel = factor(fuel, levels = fuel_order),
            scenario = if_else(grepl(",date", scenario),
                               substr(scenario, 1, regexpr(",date", scenario)[1]-1),

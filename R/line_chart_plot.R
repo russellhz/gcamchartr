@@ -37,17 +37,30 @@ line_chart_plot <- function(data, output_dir, fill_col = "scenario", diff = F,
   # Data needs to be aggregated to only the fill(color) column and year
   data <- data %>% group_by_(fill_col, "year") %>% summarise(value = sum(value))
 
+  max_y_axis <- max(data$value) * 1.05
+
+  min_y_axis <- min(0, min(data$value) * 1.05)
+
   all_scen_plot <- ggplot(data, aes_string("year", "value", color = fill_col)) +
-    geom_line() +
+    geom_line(size = 1.5) +
     guides(color = guide_legend(title = stringr::str_to_title(fill_col))) +
     labs(y = y_axis, title = attributes(data)$query) +
     theme(plot.title = element_text(size = 18, face = "bold"),
           axis.title.x = element_text(size = 14),
           axis.title.y = element_text(size = 14),
-          axis.text.x = element_text(size = 12, angle = 45),
+          axis.text.x = element_text(size = 12, angle = 90, vjust = 0.5, hjust=1),
           axis.text.y = element_text(size = 12),
-          legend.title = element_text(size = 14)) +
-    scale_x_continuous(breaks = seq(min(data$year), max(data$year),break_size))
+          legend.title = element_text(size = 14),
+          panel.border = element_rect(colour = "black", fill=NA, size=1),
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank(),
+          panel.background = element_rect(color = "white", fill = "white"),
+          panel.grid.major.y = element_line(color = "gray62"),
+          panel.grid.minor.y = element_line(color = "gray62")) +
+    scale_x_continuous(breaks = seq(min(data$year), max(data$year),break_size),
+                       expand = c(0,0)) +
+    expand_limits(y = 0) +
+    scale_y_continuous(expand = c(0, 0), limits = c(min_y_axis, max_y_axis))
 
   if (diff == T){
     all_scen_plot <- all_scen_plot +

@@ -54,7 +54,8 @@ climate_forcing_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%
     gather(year, value, `1980`:`2100`) %>%
-    mutate(year = as.integer(year)) %>%
+    mutate(year = as.integer(year),
+           value = as.numeric(value)) %>%
     filter(year >= 2010) %>%
     mutate(scenario = if_else(grepl(",date", scenario),
                               substr(scenario, 1, regexpr(",date", scenario)[1]-1),
@@ -95,5 +96,68 @@ CO2_concentration_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
   attr(df, "query") <- query_title
   attr(df, "colors") <- NULL
   attr(df, "default_plot") <- "line"
+  return(df)
+}
+
+#' CO2_emissions_data
+#'
+#' Process CO2 emissions query
+#' @param query GCAM query containing CO2 emissions data of one or multiple scenarios
+#' @param scenario GCAM scenarios to include in processed data
+#' @keywords CO2 emissions
+#' @import dplyr tidyr
+#' @export
+#' @examples
+#' CO2_emissions_data("queryA.csv", c("Reference1", "Reference2"))
+
+CO2_emissions_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
+  query_title <- query_id(query_dir) %>%
+    filter(file == query) %>%
+    select(title) %>%
+    as.character
+
+  df <- read_query(paste0(query_dir,query), skip = 1) %>%
+    filter(scenario != query_title, scenario != "scenario",
+           scenario %in% scenarios) %>%
+    gather(year, value, matches("^[0-9]{4}$")) %>%
+    mutate(year = as.integer(year),
+           value = as.numeric(value) * 44/12,
+           Units = "MtCO2") %>%
+    filter(year >= 2010) %>%
+    mutate(scenario = if_else(grepl(",date", scenario),
+                              substr(scenario, 1, regexpr(",date", scenario)[1]-1),
+                              scenario))
+  attr(df, "query") <- query_title
+  attr(df, "colors") <- NULL
+  attr(df, "default_plot") <- "line"
+  return(df)
+}
+
+#' CO2_emissions_agg_sector_data
+#'
+#' Process CO2 emissions by aggregate sector query. Not currently mapped
+#' @param query GCAM query containing CO2 emissions data of one or multiple scenarios
+#' @param scenario GCAM scenarios to include in processed data
+#' @keywords CO2 emissions
+#' @import dplyr tidyr
+#' @export
+#' @examples
+#' CO2_emissions_agg_sector_data("queryA.csv", c("Reference1", "Reference2"))
+
+CO2_emissions_agg_sector_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
+  query_title <- read_lines(paste0(query_dir,query))[1] %>%
+    stringr::str_replace_all(",","")
+
+  df <- read_query(paste0(query_dir,query), skip = 1) %>%
+    filter(scenario != query_title, scenario != "scenario",
+           scenario %in% scenarios) %>%
+    gather(year, value, matches("^[0-9]{4}$")) %>%
+    mutate(year = as.integer(year),
+           value = as.numeric(value) * 44/12,
+           Units = "MtCO2") %>%
+    filter(year >= 2010) %>%
+    mutate(scenario = if_else(grepl(",date", scenario),
+                              substr(scenario, 1, regexpr(",date", scenario)[1]-1),
+                              scenario))
   return(df)
 }

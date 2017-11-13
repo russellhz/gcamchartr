@@ -133,10 +133,12 @@ data_processer <- function(folder = QUERY_FOLDER, scenarios = SCENARIOS){
         object_name <- name %>% stringr::str_replace("_data", "")
         if (length(which(queries$title == qn)) > 1){
           qf <- queries$file[which(qn == queries$title)[1]]
-          attributes <- attributes(fun(qf, scenarios, folder))
-          data_output[[object_name]] <- lapply(queries$file, fun, scenarios, folder) %>% bind_rows
-          attributes(data_output[[object_name]]) <- attributes
-        }else{
+          tribs <- attributes(fun(qf, scenarios, folder))
+          data_output[[object_name]] <- lapply(queries$file[which(qn == queries$title)], fun, scenarios, folder) %>% bind_rows
+          for (i in 4:length(tribs)){
+            attr(data_output[[object_name]], names(tribs[i])) <- tribs[[i]]
+          }
+        } else {
           qf <- queries$file[which(qn == queries$title)]
           data_output[[object_name]] <- fun(qf, scenarios, folder)
         }

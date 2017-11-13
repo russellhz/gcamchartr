@@ -6,7 +6,7 @@
 \usage{
 bar_chart_plot(data, output_dir, fill_col = attributes(data)$fill,
   colors = attributes(data)$colors, diff = F, region = NULL, width = 10,
-  height = 7, break_size = 10)
+  height = 7, break_size = 10, remove_title = F)
 }
 \arguments{
 \item{data}{Dataframe/tibble of processed GCAM data}

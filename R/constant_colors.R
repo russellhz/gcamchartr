@@ -8,7 +8,7 @@ PRIMARY_ENERGY_COLORS <- c(Oil = "red4", `Oil CCS` = "red", `Natural Gas` = "dod
 ELEC_GEN_COLORS <- c(Oil = "red4", `Oil w/ CCS` = "red", `Gas` = "dodgerblue4", `Gas w/ CCS` = "dodgerblue",
                            Coal = "maroon4", `Coal w/ CCS` = "maroon1", Biomass = "green4", `Biomass w/ CCS` = "green",
                            Nuclear = "darkorange", `Hydro` = "cyan", Solar ="gold",
-                           Wind = "orchid1", Geothermal = "saddlebrown", `CHP` = "black")
+                           Wind = "orchid1", Geothermal = "saddlebrown", `H2 CHP` = "black")
 
 TRANSPORT_COLORS <- c(Liquids = "firebrick4", `Hybrid Liquids` = "firebrick1", NG = "dodgerblue", BEV = "gold", FCEV = "darkorchid")
 

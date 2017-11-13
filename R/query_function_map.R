@@ -11,4 +11,5 @@ query_function_map <- list(building_fe_data = c("Building final energy by servic
                            primary_energy_data = c("Primary energy with CCS (Direct Equivalent)"),
                            refined_liquids_data = c("Refined liquids production by technology"),
                            transport_fe_data = c("Transportation final energy by subsector (mode) and fuel"),
-                           temperature_data = c("Global mean temperature"))
+                           temperature_data = c("Global mean temperature"),
+                           CO2_emissions_data = c("CO2 emissions by region"))
