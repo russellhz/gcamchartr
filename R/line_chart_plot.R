@@ -15,7 +15,8 @@
 #' line_chart_plot(data[["primary_energy"]], output_dir = "/outputs")
 
 line_chart_plot <- function(data, output_dir, fill_col = "scenario", diff = F,
-                           region = NULL, width = 10, height = 7, break_size = 10){
+                           region = NULL, width = 10, height = 7, break_size = 10,
+                           manual_colors = NULL, jitter = F){
   # Filter by region if necessary
   if (!is.null(region)){
     if (length(unique(data$region)) > 1){
@@ -41,8 +42,16 @@ line_chart_plot <- function(data, output_dir, fill_col = "scenario", diff = F,
 
   min_y_axis <- min(0, min(data$value) * 1.05)
 
-  all_scen_plot <- ggplot(data, aes_string("year", "value", color = fill_col)) +
-    geom_line(size = 1.5) +
+  all_scen_plot <- ggplot(data, aes_string("year", "value", color = fill_col))
+
+  if (jitter == T){
+    all_scen_plot <- all_scen_plot +
+      geom_line(size = 1.5, position = position_jitter(h = 0))
+  } else {
+    all_scen_plot <- all_scen_plot +
+      geom_line(size = 1.5)
+  }
+  all_scen_plot <- all_scen_plot +
     guides(color = guide_legend(title = stringr::str_to_title(fill_col))) +
     labs(y = y_axis, title = attributes(data)$query) +
     theme(plot.title = element_text(size = 18, face = "bold"),
@@ -61,6 +70,12 @@ line_chart_plot <- function(data, output_dir, fill_col = "scenario", diff = F,
                        expand = c(0,0)) +
     expand_limits(y = 0) +
     scale_y_continuous(expand = c(0, 0), limits = c(min_y_axis, max_y_axis))
+
+  # Use own colors if not NULL
+  if (!is.null(manual_colors)){
+    all_scen_plot <- all_scen_plot +
+      scale_color_manual(values = manual_colors)
+  }
 
   if (diff == T){
     all_scen_plot <- all_scen_plot +

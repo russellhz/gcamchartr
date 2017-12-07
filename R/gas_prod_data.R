@@ -18,7 +18,6 @@ gas_prod_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
     as.character
 
   GP <- read_query(paste0(query_dir,query), skip = 1) %>%
-    select(-X27) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios) %>%
     gather(year, value, `1990`:`2100`) %>%

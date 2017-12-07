@@ -18,7 +18,6 @@ freight_transport_so_data <- function(query, scenarios, query_dir = QUERY_FOLDER
     as.character
 
   FSO <- read_query(paste0(query_dir,query), skip = 1) %>%
-    select(-X28) %>%
     filter(scenario != query_title, scenario != "scenario",
            scenario %in% scenarios,
            sector == "trn_freight_road") %>%
