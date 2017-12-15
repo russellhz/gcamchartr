@@ -25,3 +25,7 @@ LAND_COLORS <- c(`Forest (unmanaged)` = "saddlebrown", `Forest (managed)` = "san
                  `Pasture (other)` = "green4", `Pasture (grazed)` = "green",
                  Desert = "khaki", Grass = "firebrick", Shrubs = "darkviolet",Crops = "dodgerblue3",
                  Biomass = "gold", OtherArable = "deeppink3", Urban = "black", Tundra = 'turquoise')
+
+SERVICE_OUTPUT_COLORS <- c(`Refined Liquids` = "firebrick4", `Gas` = "dodgerblue",
+                         `Coal` = "lightgoldenrod4", `Biomass` = "green4",`Traditional Biomass` = "saddlebrown",
+                         Electricity = "gold", Hydrogen = "darkorchid", `District Heat` = "black")

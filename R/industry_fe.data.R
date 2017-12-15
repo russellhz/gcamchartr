@@ -25,7 +25,8 @@ industry_fe_data <- function(query, scenarios, query_dir = QUERY_FOLDER){
            scenario %in% scenarios) %>%
     gather(year, value, `1990`:`2100`) %>%
     mutate(year = as.integer(year)) %>%
-    filter(year >= 2010) %>%
+    filter(year >= 2010,
+           Units != 'EJ_or_Share') %>%
     left_join(industry_fe_lookup, by = "input") %>%
     group_by(scenario, region, Units, year, fuel) %>%
     summarise(value = sum(value)) %>%

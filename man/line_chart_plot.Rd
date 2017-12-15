@@ -5,7 +5,8 @@
 \title{line_chart_plot}
 \usage{
 line_chart_plot(data, output_dir, fill_col = "scenario", diff = F,
-  region = NULL, width = 10, height = 7, break_size = 10)
+  region = NULL, width = 10, height = 7, break_size = 10,
+  manual_colors = NULL, jitter = F)
 }
 \arguments{
 \item{data}{Dataframe/tibble of processed GCAM data}

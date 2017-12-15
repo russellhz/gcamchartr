@@ -13,4 +13,6 @@ query_function_map <- list(building_fe_data = c("Building final energy by servic
                            transport_fe_data = c("Transportation final energy by subsector (mode) and fuel"),
                            temperature_data = c("Global mean temperature"),
                            CO2_emissions_data = c("CO2 emissions by region"),
-                           building_heating_data = c("Building final energy by service and fuel"))
+                           building_heating_data = c("Building final energy by service and fuel"),
+                           building_so_heat_data = c("Building service output by subsector (fuel)"),
+                           industry_so_enuse_data = c("Industry primary output by technology"))
